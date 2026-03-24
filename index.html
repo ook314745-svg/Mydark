@@ -260,7 +260,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;min-h
           <button class="sm-btn del" onclick="clearKey()">🗑 حذف</button>
         </div>
         <div style="font-size:.72rem;color:var(--dim);margin-top:-.5rem;margin-bottom:.3rem;direction:ltr;">
-          الحصول على مفتاح ← <a href="https://console.groq.com/keys" target="_blank" style="color:var(--accent)">console.groq.com/keys</a>
+          الحصول على مفتاح ← <span onclick="copyLink()" style="color:var(--accent);cursor:pointer;text-decoration:underline;border-bottom:1px solid var(--accent);">console.groq.com/keys</span>
         </div>
         <div style="font-size:.7rem;color:rgba(255,0,0,.4);margin-bottom:.5rem;direction:ltr;font-family:'Courier New',monospace;word-break:break-all;padding:.4rem .6rem;background:rgba(255,0,0,.05);border-radius:8px;border:1px solid rgba(255,0,0,.1);">
           FR HUB مثال: gsk_كودك
@@ -401,7 +401,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;min-h
 <button class="sm-btn del" onclick="luaClearKey()">🗑 حذف</button>
 </div>
 <div style="font-size:.72rem;color:var(--dim);margin-top:-.5rem;margin-bottom:.3rem;direction:ltr;">
-الحصول على مفتاح ← <a href="https://console.groq.com/keys" target="_blank" style="color:var(--accent)">console.groq.com/keys</a>
+الحصول على مفتاح ← <span onclick="copyLink()" style="color:var(--accent);cursor:pointer;text-decoration:underline;border-bottom:1px solid var(--accent);">console.groq.com/keys</span>
 </div>
 </div>
 
@@ -1682,6 +1682,25 @@ window.scrollTo({top:0,behavior:'smooth'});
 };
 grid.insertBefore(card,grid.firstChild);
 }
+
+function copyLink(){
+  var url='https://console.groq.com/keys';
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(url).then(function(){
+      toast('تم النسخ ✅️ افتح جوجل و حط لينك فيه و جيب API KEY ');
+    });
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=url;
+    ta.style.cssText='position:absolute;left:-9999px;top:0;';
+    document.body.appendChild(ta);
+    ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+    toast('تم النسخ✅️ افتح جوجل حط لينك و جيب ال API KEY ');
+  }
+}
+
 
 function toast(msg){
 var ex=document.querySelector('.toast');if(ex)ex.remove();
