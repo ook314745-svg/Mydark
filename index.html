@@ -668,34 +668,36 @@ c.appendChild(p);
 }
 })();
 
-/* INTRO */
+/* INTRO - FIXED */
 function startApp(){
-var i=document.getElementById('intro');
-i.classList.add('hide');
-setTimeout(function(){
-i.style.display='none';
-document.getElementById('modeSelect').style.display='flex';
-},800);
+  document.getElementById('intro').style.opacity='0';
+  setTimeout(function(){
+    document.getElementById('intro').style.display='none';
+    document.getElementById('modeSelect').style.display='flex';
+  },300);
 }
 
 function selectMode(mode){
-document.getElementById('modeSelect').style.display='none';
-if(mode==='html'){
-document.getElementById('app').style.display='block';
-}else if(mode==='lua'){
-document.getElementById('luaApp').style.display='block';
-try{var k=localStorage.getItem('frhub_key');if(k)document.getElementById('luaApiKey').value=k;}catch(e){}
-}else if(mode==='img'){
-document.getElementById('imgApp').style.display='block';
-}
+  document.getElementById('modeSelect').style.display='none';
+  if(mode==='html'){
+    document.getElementById('app').style.display='block';
+    document.body.style.background='#0a0000';
+  } else if(mode==='lua'){
+    document.getElementById('luaApp').style.display='block';
+    document.body.style.background='#0a0000';
+  } else if(mode==='img'){
+    document.getElementById('imgApp').style.display='block';
+    document.body.style.background='#0a0000';
+  }
 }
 
 function backToModeSelect(){
-document.getElementById('app').style.display='none';
-document.getElementById('luaApp').style.display='none';
-document.getElementById('imgApp').style.display='none';
-document.getElementById('modeSelect').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.getElementById('luaApp').style.display='none';
+  document.getElementById('imgApp').style.display='none';
+  document.getElementById('modeSelect').style.display='flex';
 }
+
 
 /* TABS */
 function switchTab(name){
